@@ -4,12 +4,6 @@
 __metadata:
   version: 5
 
-"package-a@workspace:packages/package-a":
-  version: 0.0.0-use.local
-  resolution: "package-a@workspace:packages/package-a"
-  languageName: unknown
-  linkType: soft
-
 "template-evm-dapp@workspace:.":
   version: 0.0.0-use.local
   resolution: "template-evm-dapp@workspace:."
