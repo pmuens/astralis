@@ -27,8 +27,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "greet": "yarn workspaces foreach -pi run greet"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "packageManager": "yarn@3.1.1"
 }
