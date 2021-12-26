@@ -23,8 +23,12 @@
     "hardhat",
     "next"
   ],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "greet": "yarn workspaces foreach -pi run greet"
   },
   "packageManager": "yarn@3.1.1"
 }
