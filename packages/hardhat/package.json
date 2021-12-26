@@ -1,0 +1,13 @@
+{
+  "name": "hardhat",
+  "version": "0.1.0",
+  "description": "Hardhat template for EVM-based dApps.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Philipp Muens",
+    "url": "https://github.com/pmuens"
+  },
+  "license": "MIT"
+}
