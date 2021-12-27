@@ -1,13 +1,14 @@
 import { ethers } from 'hardhat'
 import { expect } from 'chai'
 
+import { Counter } from '../types'
+
 describe('Counter', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let counter: any
+  let counter: Counter
 
   beforeEach(async () => {
     const factory = await ethers.getContractFactory('Counter')
-    counter = await factory.deploy(0)
+    counter = (await factory.deploy(0)) as Counter
   })
 
   it('should be possible to set the counter', async () => {

@@ -2,6 +2,7 @@ import 'dotenv/config'
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-ethers'
 import 'hardhat-deploy'
+import '@typechain/hardhat'
 import { HardhatUserConfig } from 'hardhat/config'
 
 import './tasks/accounts'
@@ -69,6 +70,10 @@ const config: HardhatUserConfig = {
         runs: 800
       }
     }
+  },
+  typechain: {
+    outDir: 'types',
+    target: 'ethers-v5'
   }
 }
 
