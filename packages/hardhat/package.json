@@ -8,7 +8,7 @@
     "coverage": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" hardhat coverage",
     "dev": "hardhat node --hostname 0.0.0.0 --watch",
     "format": "prettier --write . --config .prettierrc.js",
-    "lint": "eslint --cache -c .eslintrc.js --fix .",
+    "lint": "eslint --cache -c .eslintrc.js --fix . && solhint -c .solhintrc.js **/*.sol",
     "metrics": "cross-env REPORT_GAS=true yarn test",
     "test": "cross-env TS_NODE_TRANSPILE_ONLY=1 hardhat test"
   },
@@ -42,6 +42,8 @@
     "mocha": "^9.1.3",
     "prettier": "^2.5.1",
     "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "solhint": "^3.3.6",
+    "solhint-plugin-prettier": "^0.0.5",
     "solidity-coverage": "^0.7.17",
     "ts-node": "^10.4.0",
     "typechain": "^6.1.0",
