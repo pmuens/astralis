@@ -9,8 +9,8 @@
     "deploy": "hardhat --network $NETWORK deploy",
     "dev": "hardhat node --hostname 0.0.0.0 --watch",
     "export": "hardhat --network $NETWORK export --export exports/$NETWORK.json",
-    "format": "prettier --write . --config .prettierrc.js",
-    "lint": "eslint --cache -c .eslintrc.js --fix . && solhint -c .solhintrc.js **/*.sol",
+    "format": "prettier --config .prettierrc.js --write .",
+    "lint": "eslint --cache -c .eslintrc.js --fix . && solhint -c .solhintrc.js --fix **/*.sol",
     "metrics": "cross-env REPORT_GAS=true yarn test",
     "test": "cross-env TS_NODE_TRANSPILE_ONLY=1 hardhat test",
     "verify": "hardhat --network $NETWORK etherscan-verify --solc-input"
@@ -42,6 +42,7 @@
     "hardhat": "^2.8.0",
     "hardhat-deploy": "^0.9.22",
     "hardhat-gas-reporter": "^1.0.6",
+    "lint-staged": "^12.1.4",
     "mocha": "^9.1.3",
     "prettier": "^2.5.1",
     "prettier-plugin-solidity": "^1.0.0-beta.19",

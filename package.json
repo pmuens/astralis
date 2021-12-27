@@ -33,6 +33,7 @@
     "dev": "yarn workspaces foreach -pi run dev",
     "format": "yarn workspaces foreach -pi run format",
     "lint": "yarn workspaces foreach -pi run lint",
+    "lint-staged": "yarn workspaces foreach -pi run lint-staged",
     "metrics": "yarn workspaces foreach -pi run metrics",
     "test": "yarn workspaces foreach -pi run test",
     "hardhat:build": "yarn workspace hardhat run build",
@@ -43,6 +44,7 @@
     "hardhat:export": "yarn workspace hardhat run export",
     "hardhat:format": "yarn workspace hardhat run format",
     "hardhat:lint": "yarn workspace hardhat run lint",
+    "hardhat:lint-staged": "yarn workspace hardhat run lint-staged",
     "hardhat:metrics": "yarn workspace hardhat run metrics",
     "hardhat:test": "yarn workspace hardhat run test",
     "hardhat:verify": "yarn workspace hardhat run verify"
