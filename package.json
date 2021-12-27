@@ -34,7 +34,15 @@
     "format": "yarn workspaces foreach -pi run format",
     "lint": "yarn workspaces foreach -pi run lint",
     "metrics": "yarn workspaces foreach -pi run metrics",
-    "test": "yarn workspaces foreach -pi run test"
+    "test": "yarn workspaces foreach -pi run test",
+    "hardhat:build": "yarn workspace hardhat run build",
+    "hardhat:clean": "yarn workspace hardhat run clean",
+    "hardhat:coverage": "yarn workspace hardhat run coverage",
+    "hardhat:dev": "yarn workspace hardhat run dev",
+    "hardhat:format": "yarn workspace hardhat run format",
+    "hardhat:lint": "yarn workspace hardhat run lint",
+    "hardhat:metrics": "yarn workspace hardhat run metrics",
+    "hardhat:test": "yarn workspace hardhat run test"
   },
   "packageManager": "yarn@3.1.1"
 }
