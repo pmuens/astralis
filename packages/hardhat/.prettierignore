@@ -1,6 +1,7 @@
 .yarn
 artifacts
 cache
+deployments
 node_modules
 
 .eslintcache
