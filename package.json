@@ -47,7 +47,14 @@
     "hardhat:lint-staged": "yarn workspace hardhat run lint-staged",
     "hardhat:metrics": "yarn workspace hardhat run metrics",
     "hardhat:test": "yarn workspace hardhat run test",
-    "hardhat:verify": "yarn workspace hardhat run verify"
+    "hardhat:verify": "yarn workspace hardhat run verify",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable",
+    "prepublishOnly": "pinst --disable"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "pinst": "^2.0.0"
+  }
 }
