@@ -7,5 +7,16 @@ module.exports = {
   semi: false,
   tabWidth: 2,
   useTabs: false,
-  trailingComma: 'none'
+  trailingComma: 'none',
+  overrides: [
+    {
+      files: '*.sol',
+      options: {
+        tabWidth: 4,
+        singleQuote: false,
+        explicitTypes: 'always'
+      }
+    }
+  ],
+  plugins: [require.resolve('prettier-plugin-solidity')]
 }
