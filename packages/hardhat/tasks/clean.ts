@@ -9,6 +9,8 @@ task(TASK_CLEAN, 'Overrides the standard clean task', async (_, { config }, runS
   await Promise.all([
     fse.remove(path.join(projectDir, 'artifacts')),
     fse.remove(path.join(projectDir, 'cache')),
+    fse.remove(path.join(projectDir, 'coverage')),
+    fse.remove(path.join(projectDir, 'coverage.json')),
     fse.remove(path.join(projectDir, '.eslintcache'))
   ])
   if (config.typechain?.outDir) {

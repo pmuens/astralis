@@ -1,9 +1,10 @@
-import 'dotenv/config'
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-ethers'
+import '@typechain/hardhat'
+import 'dotenv/config'
 import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
-import '@typechain/hardhat'
+import 'solidity-coverage'
 import { HardhatUserConfig } from 'hardhat/config'
 
 import './tasks/accounts'
