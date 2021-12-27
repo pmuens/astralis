@@ -27,7 +27,10 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn workspaces foreach -pi run build",
+    "clean": "yarn workspaces foreach -pi run clean",
+    "dev": "yarn workspaces foreach -pi run dev",
+    "test": "yarn workspaces foreach -pi run test",
     "format": "yarn workspaces foreach -pi run format",
     "lint": "yarn workspaces foreach -pi run lint"
   },

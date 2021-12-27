@@ -1,4 +1,6 @@
 .yarn
+artifacts
+cache
 node_modules
 
 .eslintcache
