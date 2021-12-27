@@ -3,6 +3,24 @@
 
 __metadata:
   version: 5
+  cacheKey: 8
+
+"hardhat@workspace:packages/hardhat":
+  version: 0.0.0-use.local
+  resolution: "hardhat@workspace:packages/hardhat"
+  dependencies:
+    prettier: ^2.5.1
+  languageName: unknown
+  linkType: soft
+
+"prettier@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "prettier@npm:2.5.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 21b9408476ea1c544b0e45d51ceb94a84789ff92095abb710942d780c862d0daebdb29972d47f6b4d0f7ebbfb0ffbf56cc2cfa3e3e9d1cca54864af185b15b66
+  languageName: node
+  linkType: hard
 
 "template-evm-dapp@workspace:.":
   version: 0.0.0-use.local

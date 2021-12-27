@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "description": "Hardhat template for EVM-based dApps.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write . --config .prettierrc.js"
   },
   "author": {
     "name": "Philipp Muens",
     "url": "https://github.com/pmuens"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
 }
