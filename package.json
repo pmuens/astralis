@@ -38,11 +38,14 @@
     "hardhat:build": "yarn workspace hardhat run build",
     "hardhat:clean": "yarn workspace hardhat run clean",
     "hardhat:coverage": "yarn workspace hardhat run coverage",
+    "hardhat:deploy": "yarn workspace hardhat run deploy",
     "hardhat:dev": "yarn workspace hardhat run dev",
+    "hardhat:export": "yarn workspace hardhat run export",
     "hardhat:format": "yarn workspace hardhat run format",
     "hardhat:lint": "yarn workspace hardhat run lint",
     "hardhat:metrics": "yarn workspace hardhat run metrics",
-    "hardhat:test": "yarn workspace hardhat run test"
+    "hardhat:test": "yarn workspace hardhat run test",
+    "hardhat:verify": "yarn workspace hardhat run verify"
   },
   "packageManager": "yarn@3.1.1"
 }
