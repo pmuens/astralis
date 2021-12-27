@@ -28,7 +28,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "yarn workspaces foreach -pi run format"
+    "format": "yarn workspaces foreach -pi run format",
+    "lint": "yarn workspaces foreach -pi run lint"
   },
   "packageManager": "yarn@3.1.1"
 }

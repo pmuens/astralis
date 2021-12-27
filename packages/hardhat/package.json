@@ -4,7 +4,8 @@
   "description": "Hardhat template for EVM-based dApps.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write . --config .prettierrc.js"
+    "format": "prettier --write . --config .prettierrc.js",
+    "lint": "eslint --cache -c .eslintrc.js --fix ."
   },
   "author": {
     "name": "Philipp Muens",
@@ -12,6 +13,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.5.1"
   }
 }
