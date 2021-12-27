@@ -2,6 +2,7 @@ import 'dotenv/config'
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-ethers'
 import 'hardhat-deploy'
+import 'hardhat-gas-reporter'
 import '@typechain/hardhat'
 import { HardhatUserConfig } from 'hardhat/config'
 
@@ -14,6 +15,12 @@ const accounts = {
 
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
+  gasReporter: {
+    enabled: process.env.REPORT_GAS === 'true',
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    currency: 'USD',
+    src: './contracts'
+  },
   namedAccounts: {
     deployer: {
       default: 0
