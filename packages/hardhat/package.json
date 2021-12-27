@@ -1,7 +1,7 @@
 {
   "name": "hardhat",
   "version": "0.1.0",
-  "description": "Hardhat template for EVM-based dApps.",
+  "description": "Hardhat Template for EVM-based dApps.",
   "scripts": {
     "build": "hardhat compile",
     "clean": "hardhat clean",
