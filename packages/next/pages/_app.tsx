@@ -2,6 +2,9 @@ import '../styles/globals.css'
 import { DefaultSeo } from 'next-seo'
 import type { AppProps } from 'next/app'
 
+import Head from '../components/Head'
+import Layout from '../components/Layout'
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -10,7 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         description="The Next.js Template for EVM-based dApps."
         titleTemplate="%s - Next.js Template for EVM-based dApps"
       />
-      <Component {...pageProps} />
+      <Head />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }
