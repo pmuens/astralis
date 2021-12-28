@@ -8,6 +8,7 @@
     "dev": "next dev",
     "format": "prettier --config .prettierrc.js --write .",
     "lint": "next lint --cache -c .eslintrc.js --fix .",
+    "lints": "lint-staged",
     "start": "next start"
   },
   "author": {
