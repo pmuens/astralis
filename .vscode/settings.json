@@ -1,6 +1,7 @@
 {
   "eslint.workingDirectories": [
-    { "directory": "packages/hardhat", "changeProcessCWD": true }
+    { "directory": "packages/hardhat", "changeProcessCWD": true },
+    { "directory": "packages/next", "changeProcessCWD": true }
   ],
   "[solidity]": {
     "editor.defaultFormatter": "JuanBlanco.solidity"
