@@ -1,6 +1,17 @@
 import Link from 'next/link'
+import { useEffect } from 'react'
+import { useEthers, shortenAddress } from '@usedapp/core'
 
 export default function Header() {
+  const { account, error, activateBrowserWallet, deactivate } = useEthers()
+
+  useEffect(() => {
+    if (error) {
+      alert('An Error occurred. Check the Browser logs for more info.')
+      console.error(error)
+    }
+  }, [error])
+
   return (
     <header>
       <div>
@@ -10,15 +21,14 @@ export default function Header() {
           </a>
         </Link>
         <nav>
-          <Link href="/first-link">
-            <a>First Link</a>
-          </Link>
-          <Link href="/second-link">
-            <a>Second Link</a>
-          </Link>
-          <Link href="/third-link">
-            <a>Third Link</a>
-          </Link>
+          {account ? (
+            <>
+              <span>{shortenAddress(account)}</span>
+              <button onClick={() => deactivate()}>Disconnect</button>
+            </>
+          ) : (
+            <button onClick={() => activateBrowserWallet()}>Connect</button>
+          )}
         </nav>
       </div>
     </header>

@@ -7,8 +7,15 @@ Monorepo Template for EVM-based dApps.
 1. `git clone <url>`
 2. `cp ./packages/hardhat/.env.example ./packages/hardhat/.env`
 3. Update `./packages/hardhat/.env`
-4. `yarn install`
-5. `yarn dev`
+4. `cp ./packages/next/.env.example ./packages/next/.env`
+5. Update `./packages/next/.env`
+6. `yarn install`
+7. `yarn dev`
+8. MetaMask
+   1. Import Hardhat Account #0 Private Key
+   2. Switch to Hardhat Account #0
+   3. Update "Localhost 8545" Network Chain ID to `31337` (Settings -> Networks -> Localhost 8545 -> Chain ID)
+   4. Reset Account (Settings -> Advanced -> Reset Account)
 
 ## Useful Commands
 
