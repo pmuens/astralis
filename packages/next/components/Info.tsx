@@ -1,19 +1,39 @@
-import { getChainName, useEtherBalance, useEthers, useGasPrice } from '@usedapp/core'
+import { shortenAddress, useEtherBalance, useEthers, useGasPrice } from '@usedapp/core'
 
 import { formatValue } from '../utils/main'
+import useConnectionInfo from '../hooks/useConnectionInfo'
 
 export default function Info() {
-  const { chainId, account } = useEthers()
-  const etherBalance = useEtherBalance(account)
   const gasPrice = useGasPrice()
+  const { account } = useEthers()
+  const { chainName } = useConnectionInfo()
+  const etherBalance = useEtherBalance(account)
 
   return (
-    <section>
-      <h2>Connection Information</h2>
-      {chainId && <p>Chain: {getChainName(chainId)}</p>}
-      {chainId && <p>Chain ID: {chainId}</p>}
-      {gasPrice && <p>Gas Price: {formatValue(gasPrice, 9)} gwei</p>}
-      {etherBalance && <p>ETH Balance: {formatValue(etherBalance, 18)}</p>}
-    </section>
+    <>
+      {chainName && (
+        <p>
+          Connected to <u>{chainName}</u>
+          {account && (
+            <>
+              {' '}
+              with <u>{shortenAddress(account)}</u>
+            </>
+          )}
+        </p>
+      )}
+
+      {gasPrice && (
+        <p>
+          Gas price is <u>{formatValue(gasPrice, 9)}</u> gwei
+        </p>
+      )}
+
+      {account && etherBalance && (
+        <p>
+          Account has <u>{formatValue(etherBalance, 18)}</u> ETH
+        </p>
+      )}
+    </>
   )
 }
