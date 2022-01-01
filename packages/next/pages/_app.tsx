@@ -6,6 +6,7 @@ import { Config, DAppProvider } from '@usedapp/core'
 import type { AppProps } from 'next/app'
 
 import Head from '../components/Head'
+import Alert from '../components/Alert'
 import Layout from '../components/Layout'
 import { SharedStateProvider } from '../utils/SharedState'
 
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <DAppProvider config={config}>
           <Head />
           <Layout>
+            <Alert />
             <Component {...pageProps} />
           </Layout>
         </DAppProvider>
