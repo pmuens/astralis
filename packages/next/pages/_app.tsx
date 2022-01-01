@@ -7,6 +7,7 @@ import type { AppProps } from 'next/app'
 
 import Head from '../components/Head'
 import Layout from '../components/Layout'
+import { SharedStateProvider } from '../utils/SharedState'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID!)
@@ -24,12 +25,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         description="The Next.js Template for EVM-based dApps."
         titleTemplate="%s - Next.js Template for EVM-based dApps"
       />
-      <DAppProvider config={config}>
-        <Head />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </DAppProvider>
+      <SharedStateProvider>
+        <DAppProvider config={config}>
+          <Head />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </DAppProvider>
+      </SharedStateProvider>
     </>
   )
 }
