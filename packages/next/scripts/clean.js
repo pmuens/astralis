@@ -5,6 +5,7 @@ async function main() {
   const projectDir = path.join(__dirname, '..')
 
   await fse.remove(path.join(projectDir, '.next'))
+  await fse.remove(path.join(projectDir, 'out'))
 }
 
 main()

@@ -6,6 +6,7 @@
     "build": "next build",
     "clean": "node scripts/clean.js",
     "dev": "next dev",
+    "export": "next export",
     "format": "prettier --config .prettierrc.js --write .",
     "lint": "next lint --cache -c .eslintrc.js --fix .",
     "lints": "lint-staged",

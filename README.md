@@ -29,6 +29,7 @@ yarn [<workspace>:]lint-staged
 yarn [<workspace>:]metrics
 yarn [<workspace>:]test
 yarn [<workspace>:]watch
+NETWORK= yarn [<workspace>:]export
 
 yarn workspace <name> add [-D] <dependency>
 yarn workspace <name> run <script>
