@@ -29,6 +29,7 @@ yarn [<workspace>:]lint-staged
 yarn [<workspace>:]metrics
 yarn [<workspace>:]test
 yarn [<workspace>:]watch
+NETWORK= FLEEK_API_KEY= yarn [<workspace>:]deploy
 NETWORK= yarn [<workspace>:]export
 
 yarn workspace <name> add [-D] <dependency>
@@ -37,6 +38,9 @@ yarn workspace <name> run <script>
 NETWORK= yarn hardhat:deploy
 NETWORK= yarn hardhat:export
 NETWORK= yarn hardhat:verify
+
+FLEEK_API_KEY= yarn workspace next exec 'fleek site:init'
+FLEEK_API_KEY= yarn next:deploy
 ```
 
 ## Checklists
