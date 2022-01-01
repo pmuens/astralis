@@ -17,6 +17,25 @@ Monorepo Template for EVM-based dApps.
    3. Update "Localhost 8545" Network Chain ID to `31337` (Settings -> Networks -> Localhost 8545 -> Chain ID)
    4. Reset Account (Settings -> Advanced -> Reset Account)
 
+## Deployment
+
+### Hardhat
+
+1. `yarn hardhat:clean`
+2. Ensure that `./packages/hardhat/.env` is up-to-date
+3. `NETWORK= yarn hardhat:deploy`
+4. `NETWORK= yarn hardhat:verify`
+
+### Next
+
+1. `yarn next:clean`
+2. Ensure that `./packages/next/.env` is up-to-date
+3. `FLEEK_API_KEY= yarn workspace next exec 'fleek site:init'` \*
+4. Open `./packages/next/.fleek.json` and change `publicDir` to `out` \*
+5. `FLEEK_API_KEY= yarn next:deploy`
+
+\* Not necessary for subsequent deployments.
+
 ## Useful Commands
 
 ```sh
