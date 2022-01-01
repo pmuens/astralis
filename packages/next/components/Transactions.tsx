@@ -4,13 +4,25 @@ export default function Transactions() {
   const { transactions } = useTransactions()
 
   const items = transactions.map((item) => {
-    return <li key={item.transaction.hash}>{item.transaction.hash}</li>
+    const hash = item.transaction.hash
+    let status = 'Pending'
+    if (item.receipt?.confirmations) {
+      status = 'Approved'
+    }
+    return (
+      <li key={hash}>
+        <p>
+          {status} {shortenHash(hash)}
+        </p>
+      </li>
+    )
   })
 
-  return (
-    <section>
-      <h2>Transactions</h2>
-      {items.length ? <ol>{items}</ol> : <p>No Transactions</p>}
-    </section>
-  )
+  return items.length ? <ol>{items}</ol> : <p>-</p>
+}
+
+function shortenHash(hash: string): string {
+  const start = hash.slice(0, 6)
+  const end = hash.slice(-4)
+  return `${start}...${end}`
 }
