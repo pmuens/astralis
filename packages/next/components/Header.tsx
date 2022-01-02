@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useEthers, shortenAddress } from '@usedapp/core'
 
 import Logo from './Logo'
 import { useSharedState } from '../utils/SharedState'
 
 export default function Header() {
+  const router = useRouter()
   const { setErrorMessage } = useSharedState()
   const { account, error, activateBrowserWallet, deactivate } = useEthers()
 
@@ -38,13 +40,19 @@ export default function Header() {
         </a>
       </Link>
       <nav>
-        {account ? (
-          <>
-            <span>{shortenAddress(account)}</span>
-            <button onClick={() => deactivate()}>Disconnect</button>
-          </>
+        {router.pathname.includes('app') ? (
+          account ? (
+            <>
+              <span>{shortenAddress(account)}</span>
+              <button onClick={() => deactivate()}>Disconnect</button>
+            </>
+          ) : (
+            <button onClick={() => activateBrowserWallet()}>Connect Wallet</button>
+          )
         ) : (
-          <button onClick={() => activateBrowserWallet()}>Connect Wallet</button>
+          <Link href="/app">
+            <a>Enter App</a>
+          </Link>
         )}
       </nav>
     </header>
