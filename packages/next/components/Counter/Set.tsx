@@ -1,8 +1,8 @@
 import { useContractFunction } from '@usedapp/core'
 import { useEffect, MouseEvent, Dispatch, SetStateAction } from 'react'
 
-import { getContractInfo } from '../utils/main'
-import { useSharedState } from '../utils/SharedState'
+import { getContractInfo } from '../../utils/main'
+import { useSharedState } from '../../utils/SharedState'
 
 export default function Set(props: Props) {
   const { contract } = getContractInfo()

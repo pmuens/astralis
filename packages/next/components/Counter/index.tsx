@@ -5,8 +5,8 @@ import { formatUnits } from '@ethersproject/units'
 import Set from './Set'
 import Increment from './Increment'
 import Decrement from './Decrement'
-import { getContractInfo } from '../utils/main'
-import useConnectionInfo from '../hooks/useConnectionInfo'
+import { getContractInfo } from '../../utils/main'
+import useConnectionInfo from '../../hooks/useConnectionInfo'
 
 export default function Counter() {
   const { address, abi } = getContractInfo()
