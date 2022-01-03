@@ -2,5 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Counter } from "./Counter";
+export type { Messages } from "./Messages";
 
 export { Counter__factory } from "./factories/Counter__factory";
+export { Messages__factory } from "./factories/Messages__factory";
