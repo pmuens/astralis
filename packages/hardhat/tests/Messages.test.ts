@@ -147,4 +147,15 @@ describe('Messages', () => {
       expect(await messages.messages(id)).to.deep.equal([id, body, owner, createdAt, updatedAt, isEntity])
     })
   })
+
+  describe('#nextId()', () => {
+    it('should start with a value of 0', async () => {
+      expect(await messages.nextId()).to.equal(0)
+    })
+
+    it('should be possible to get the value of the next message id', async () => {
+      await messages.connect(user1).createMessage('Hello World')
+      expect(await messages.nextId()).to.equal(1)
+    })
+  })
 })
