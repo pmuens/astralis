@@ -46,6 +46,7 @@ export interface MessagesInterface extends utils.Interface {
   functions: {
     "createMessage(string)": FunctionFragment;
     "getMessage(uint256)": FunctionFragment;
+    "messages(uint256)": FunctionFragment;
     "nextId()": FunctionFragment;
     "removeMessage(uint256)": FunctionFragment;
     "updateMessage(uint256,string)": FunctionFragment;
@@ -57,6 +58,10 @@ export interface MessagesInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getMessage",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "messages",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "nextId", values?: undefined): string;
@@ -74,6 +79,7 @@ export interface MessagesInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getMessage", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "messages", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nextId", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "removeMessage",
@@ -153,6 +159,20 @@ export interface Messages extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[MessageStructOutput]>;
 
+    messages(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, string, string, BigNumber, BigNumber, boolean] & {
+        id: BigNumber;
+        body: string;
+        owner: string;
+        createdAt: BigNumber;
+        updatedAt: BigNumber;
+        isEntity: boolean;
+      }
+    >;
+
     nextId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     removeMessage(
@@ -177,6 +197,20 @@ export interface Messages extends BaseContract {
     overrides?: CallOverrides
   ): Promise<MessageStructOutput>;
 
+  messages(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, string, string, BigNumber, BigNumber, boolean] & {
+      id: BigNumber;
+      body: string;
+      owner: string;
+      createdAt: BigNumber;
+      updatedAt: BigNumber;
+      isEntity: boolean;
+    }
+  >;
+
   nextId(overrides?: CallOverrides): Promise<BigNumber>;
 
   removeMessage(
@@ -197,6 +231,20 @@ export interface Messages extends BaseContract {
       id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<MessageStructOutput>;
+
+    messages(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, string, string, BigNumber, BigNumber, boolean] & {
+        id: BigNumber;
+        body: string;
+        owner: string;
+        createdAt: BigNumber;
+        updatedAt: BigNumber;
+        isEntity: boolean;
+      }
+    >;
 
     nextId(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -261,6 +309,8 @@ export interface Messages extends BaseContract {
 
     getMessage(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
+    messages(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
     nextId(overrides?: CallOverrides): Promise<BigNumber>;
 
     removeMessage(
@@ -283,6 +333,11 @@ export interface Messages extends BaseContract {
 
     getMessage(
       id: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    messages(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

@@ -30,7 +30,7 @@ contract Messages {
     uint256 public nextId;
 
     /// @notice Maps a message's id to its struct.
-    mapping(uint256 => Message) private _messages;
+    mapping(uint256 => Message) public messages;
 
     /// @notice Emitted when a message is created.
     /// @param id The message's id.
@@ -57,7 +57,7 @@ contract Messages {
     /// @dev Throws when the caller is not the owner of the message.
     /// @param id The message's id.
     modifier onlyOwner(uint256 id) {
-        require(msg.sender == _messages[id].owner, Errors._NotOwner);
+        require(msg.sender == messages[id].owner, Errors._NotOwner);
         _;
     }
 
@@ -65,7 +65,7 @@ contract Messages {
     /// @dev Throws when the message doesn't exist.
     /// @param id The message's id.
     modifier messageExists(uint256 id) {
-        require(_messages[id].isEntity, Errors._DoesNotExist);
+        require(messages[id].isEntity, Errors._DoesNotExist);
         _;
     }
 
@@ -91,7 +91,7 @@ contract Messages {
             isEntity: true
         });
 
-        _messages[id] = message;
+        messages[id] = message;
 
         emit CreateMessage(id, msg.sender, body, block.timestamp);
         console.log("%s created a new message with id %s.", msg.sender, id);
@@ -111,8 +111,8 @@ contract Messages {
     function updateMessage(uint256 id, string calldata body) external messageExists(id) onlyOwner(id) returns (bool) {
         require(bytes(body).length > 0, Errors._BodyEmpty);
 
-        _messages[id].body = body;
-        _messages[id].updatedAt = block.timestamp;
+        messages[id].body = body;
+        messages[id].updatedAt = block.timestamp;
 
         emit UpdateMessage(id, msg.sender, body, block.timestamp);
         console.log("%s updated the message with id %s.", msg.sender, id);
@@ -128,9 +128,9 @@ contract Messages {
     /// @param id The message's id.
     /// @return A boolean which indicates whether the removal was successful.
     function removeMessage(uint256 id) external messageExists(id) onlyOwner(id) returns (bool) {
-        string memory body = _messages[id].body;
+        string memory body = messages[id].body;
 
-        delete _messages[id];
+        delete messages[id];
 
         emit RemoveMessage(id, msg.sender, body, block.timestamp);
         console.log("%s removed the message with id %s.", msg.sender, id);
@@ -145,6 +145,6 @@ contract Messages {
     /// @return The message's struct.
     function getMessage(uint256 id) external view messageExists(id) returns (Message memory) {
         console.log("Loading message with id %s.", id);
-        return _messages[id];
+        return messages[id];
     }
 }

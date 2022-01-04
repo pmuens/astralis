@@ -120,4 +120,31 @@ describe('Messages', () => {
       expect(await messages.getMessage(id)).to.deep.equal([id, body, owner, createdAt, updatedAt, isEntity])
     })
   })
+
+  describe('#messages()', () => {
+    it('should be possible to get information about a message', async () => {
+      const id = ethers.BigNumber.from(0)
+      const body = 'Hello World'
+      const owner = user1.address
+      const createdAt = ethers.BigNumber.from(block.timestamp + 1)
+      const updatedAt = ethers.BigNumber.from(block.timestamp + 1)
+      const isEntity = true
+
+      await messages.connect(user1).createMessage(body)
+      expect(await messages.nextId()).to.equal(1)
+
+      expect(await messages.messages(id)).to.deep.equal([id, body, owner, createdAt, updatedAt, isEntity])
+    })
+
+    it("shouldn't revert for non-existent messages", async () => {
+      const id = ethers.BigNumber.from(0)
+      const body = ''
+      const owner = ethers.constants.AddressZero
+      const createdAt = ethers.BigNumber.from(0)
+      const updatedAt = ethers.BigNumber.from(0)
+      const isEntity = false
+
+      expect(await messages.messages(id)).to.deep.equal([id, body, owner, createdAt, updatedAt, isEntity])
+    })
+  })
 })
