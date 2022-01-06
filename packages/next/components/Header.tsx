@@ -8,14 +8,15 @@ import { useSharedState } from '../utils/SharedState'
 
 export default function Header() {
   const router = useRouter()
-  const { setErrorMessage } = useSharedState()
+  const { setNotification } = useSharedState()
   const { account, error, activateBrowserWallet, deactivate } = useEthers()
 
   useEffect(() => {
     if (error) {
-      setErrorMessage(error.message)
+      const { message } = error
+      setNotification({ message, type: 'error' })
     }
-  }, [error, setErrorMessage])
+  }, [error, setNotification])
 
   return (
     <header>

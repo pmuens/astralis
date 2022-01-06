@@ -6,18 +6,18 @@ export function useSharedState(): SharedStateContext {
 
 export function SharedStateProvider(props: Props) {
   const { children } = props
-  const [errorMessage, setErrorMessage] = useState<string>()
+  const [notification, setNotification] = useState<Notification>()
 
-  function resetErrorMessage(): void {
-    setErrorMessage(undefined)
+  function resetNotification(): void {
+    setNotification(undefined)
   }
 
   return (
     <SharedStateContext.Provider
       value={{
-        errorMessage,
-        setErrorMessage,
-        resetErrorMessage
+        notification,
+        setNotification,
+        resetNotification
       }}
     >
       {children}
@@ -28,11 +28,16 @@ export function SharedStateProvider(props: Props) {
 const SharedStateContext = createContext<SharedStateContext>({} as SharedStateContext)
 
 type SharedStateContext = {
-  errorMessage?: string
-  setErrorMessage: Dispatch<SetStateAction<string | undefined>>
-  resetErrorMessage: () => void
+  notification?: Notification
+  setNotification: Dispatch<SetStateAction<Notification | undefined>>
+  resetNotification: () => void
 }
 
 type Props = {
   children: JSX.Element
+}
+
+type Notification = {
+  message: string
+  type: 'info' | 'success' | 'error'
 }

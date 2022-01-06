@@ -3,14 +3,14 @@ import { useEffect } from 'react'
 import { useSharedState } from '../utils/SharedState'
 
 export default function Alert() {
-  const { errorMessage, resetErrorMessage } = useSharedState()
+  const { notification, resetNotification } = useSharedState()
 
   useEffect(() => {
-    if (errorMessage) {
-      alert(errorMessage)
-      resetErrorMessage()
+    if (notification) {
+      alert(notification.message)
+      resetNotification()
     }
-  }, [errorMessage, resetErrorMessage])
+  }, [notification, resetNotification])
 
   return <></>
 }

@@ -7,7 +7,7 @@ import { useSharedState } from '../../utils/SharedState'
 export default function Set(props: Props) {
   const { contract } = getContractInfo('Counter')
   const { isLoading, setIsLoading } = props
-  const { setErrorMessage } = useSharedState()
+  const { setNotification } = useSharedState()
   const { state, send } = useContractFunction(contract, 'set')
 
   function handleClick(event: MouseEvent<HTMLButtonElement>) {
@@ -16,7 +16,7 @@ export default function Set(props: Props) {
     if (value) {
       const parsed = parseInt(value)
       if (Number.isNaN(parsed)) {
-        setErrorMessage('Please enter a valid number')
+        setNotification({ message: 'Please enter a valid number', type: 'error' })
       } else {
         send(parsed)
       }
@@ -27,9 +27,9 @@ export default function Set(props: Props) {
     if (state.status == 'Mining') setIsLoading(true)
     if (state.status != 'Mining') setIsLoading(false)
     if (state.status == 'Fail' || state.status == 'Exception') {
-      setErrorMessage(state.errorMessage)
+      if (state.errorMessage) setNotification({ message: state.errorMessage, type: 'error' })
     }
-  }, [state, setIsLoading, setErrorMessage])
+  }, [state, setIsLoading, setNotification])
 
   return (
     <button onClick={handleClick} disabled={isLoading}>

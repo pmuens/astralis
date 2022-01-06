@@ -13,7 +13,7 @@ const Edit: NextPage = () => {
   useEnforceWalletConnection('/app/messages')
 
   const router = useRouter()
-  const { setErrorMessage } = useSharedState()
+  const { setNotification } = useSharedState()
   const { contract } = getContractInfo('Messages')
   const [isLoading, setIsLoading] = useState(true)
   const [id, setId] = useState<number | undefined>()
@@ -34,10 +34,10 @@ const Edit: NextPage = () => {
         router.push('/app/messages')
       }
       if (state.status == 'Fail' || state.status == 'Exception') {
-        setErrorMessage(state.errorMessage)
+        if (state.errorMessage) setNotification({ message: state.errorMessage, type: 'error' })
       }
     }
-  }, [state, router, setIsLoading, setErrorMessage])
+  }, [state, router, setIsLoading, setNotification])
 
   return (
     <>

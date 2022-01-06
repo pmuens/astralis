@@ -9,7 +9,7 @@ export default function Form(props: Props) {
   const { id } = props
   const router = useRouter()
   const [body, setBody] = useState('')
-  const { setErrorMessage } = useSharedState()
+  const { setNotification } = useSharedState()
   const [isLoading, setIsLoading] = useState(true)
   const { address, abi, contract } = getContractInfo('Messages')
 
@@ -40,10 +40,10 @@ export default function Form(props: Props) {
         router.push('/app/messages')
       }
       if (state.status == 'Fail' || state.status == 'Exception') {
-        setErrorMessage(state.errorMessage)
+        if (state.errorMessage) setNotification({ message: state.errorMessage, type: 'error' })
       }
     }
-  }, [state, router, setIsLoading, setErrorMessage])
+  }, [state, router, setIsLoading, setNotification])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -51,7 +51,7 @@ export default function Form(props: Props) {
       if (isId(id)) return send(id, body)
       return send(body)
     }
-    setErrorMessage("Body can't be empty")
+    setNotification({ message: "Body can't be empty", type: 'error' })
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
