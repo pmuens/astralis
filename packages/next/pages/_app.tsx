@@ -9,6 +9,7 @@ import Head from '../components/Head'
 import Alert from '../components/Alert'
 import Layout from '../components/Layout'
 import { SharedStateProvider } from '../utils/SharedState'
+import ConnectionCheck from '../components/ConnectionCheck'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID!)
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Head />
           <Layout>
             <Alert />
+            <ConnectionCheck />
             <Component {...pageProps} />
           </Layout>
         </DAppProvider>

@@ -1,23 +1,30 @@
+import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
 
 import Info from '../../components/Info'
-import Counter from '../../components/Counter'
-import Notifications from '../../components/Notifications'
 import Transactions from '../../components/Transactions'
-import ConnectionCheck from '../../components/ConnectionCheck'
+import Notifications from '../../components/Notifications'
 
 const App: NextPage = () => {
   return (
     <>
       <NextSeo title="App" description="Welcome to the dApp." />
 
-      <ConnectionCheck />
-
-      <section>
-        <h2>Counter</h2>
-        <Counter />
-      </section>
+      <nav>
+        <ul>
+          <li>
+            <Link href="/app/counter">
+              <a>Counter App</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/app/messages">
+              <a>Messages App</a>
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
       <hr />
 

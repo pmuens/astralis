@@ -14,6 +14,10 @@ export function formatValue(value: BigNumber, digits: number): string {
   return formatUnits(roundValue(value, digits), digits)
 }
 
+export function isId(id: unknown): boolean {
+  return Number.isInteger(id)
+}
+
 export function getContractInfo(name: ContractName): ContractInfo {
   let address = process.env.NEXT_PUBLIC_COUNTER_CONTRACT_ADDRESS!
   let abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_COUNTER_CONTRACT_ABI!))

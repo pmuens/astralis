@@ -41,14 +41,23 @@ export default function Header() {
       </Link>
       <nav>
         {router.pathname.includes('app') ? (
-          account ? (
-            <>
-              <span>{shortenAddress(account)}</span>
-              <button onClick={() => deactivate()}>Disconnect</button>
-            </>
-          ) : (
-            <button onClick={() => activateBrowserWallet()}>Connect Wallet</button>
-          )
+          <>
+            {account ? (
+              <>
+                <span>{shortenAddress(account)}</span>
+                <button onClick={() => deactivate()}>Disconnect</button>
+              </>
+            ) : (
+              <button onClick={() => activateBrowserWallet()}>Connect Wallet</button>
+            )}
+            <Link href="/app">App</Link>
+            <Link href="/app/counter">
+              <a>Counter</a>
+            </Link>
+            <Link href="/app/messages">
+              <a>Messages</a>
+            </Link>
+          </>
         ) : (
           <Link href="/app">
             <a>Enter App</a>
