@@ -17,31 +17,6 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export type MessageStruct = {
-  id: BigNumberish;
-  body: string;
-  owner: string;
-  createdAt: BigNumberish;
-  updatedAt: BigNumberish;
-  isEntity: boolean;
-};
-
-export type MessageStructOutput = [
-  BigNumber,
-  string,
-  string,
-  BigNumber,
-  BigNumber,
-  boolean
-] & {
-  id: BigNumber;
-  body: string;
-  owner: string;
-  createdAt: BigNumber;
-  updatedAt: BigNumber;
-  isEntity: boolean;
-};
-
 export interface MessagesInterface extends utils.Interface {
   functions: {
     "createMessage(string)": FunctionFragment;
@@ -157,7 +132,7 @@ export interface Messages extends BaseContract {
     getMessage(
       id: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[MessageStructOutput]>;
+    ): Promise<[BigNumber, string, string, BigNumber, BigNumber, boolean]>;
 
     messages(
       arg0: BigNumberish,
@@ -195,7 +170,7 @@ export interface Messages extends BaseContract {
   getMessage(
     id: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<MessageStructOutput>;
+  ): Promise<[BigNumber, string, string, BigNumber, BigNumber, boolean]>;
 
   messages(
     arg0: BigNumberish,
@@ -230,7 +205,7 @@ export interface Messages extends BaseContract {
     getMessage(
       id: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<MessageStructOutput>;
+    ): Promise<[BigNumber, string, string, BigNumber, BigNumber, boolean]>;
 
     messages(
       arg0: BigNumberish,

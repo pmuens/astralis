@@ -142,9 +142,28 @@ contract Messages {
     /// @dev Logs debugging information.
     ///  Throws when the message doesn't exists.
     /// @param id The message's id.
-    /// @return The message's struct.
-    function getMessage(uint256 id) external view messageExists(id) returns (Message memory) {
+    /// @return The message's struct fields.
+    function getMessage(uint256 id)
+        external
+        view
+        messageExists(id)
+        returns (
+            uint256,
+            string memory,
+            address,
+            uint256,
+            uint256,
+            bool
+        )
+    {
         console.log("Loading message with id %s.", id);
-        return messages[id];
+        return (
+            messages[id].id,
+            messages[id].body,
+            messages[id].owner,
+            messages[id].createdAt,
+            messages[id].updatedAt,
+            messages[id].isEntity
+        );
     }
 }
