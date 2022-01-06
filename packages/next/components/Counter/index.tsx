@@ -9,7 +9,7 @@ import { getContractInfo } from '../../utils/main'
 import useConnectionInfo from '../../hooks/useConnectionInfo'
 
 export default function Counter() {
-  const { address, abi } = getContractInfo()
+  const { address, abi } = getContractInfo('Counter')
   const [isLoading, setIsLoading] = useState(false)
   const { isConnected, isCorrectConnection } = useConnectionInfo()
   const [counter] = useContractCall({ address, abi, method: 'get', args: [] }) ?? []

@@ -6,7 +6,7 @@ import { useSharedState } from '../../utils/SharedState'
 
 export default function Increment(props: Props) {
   const { isLoading, setIsLoading } = props
-  const { contract } = getContractInfo()
+  const { contract } = getContractInfo('Counter')
   const { setErrorMessage } = useSharedState()
   const { state, send } = useContractFunction(contract, 'increment')
 

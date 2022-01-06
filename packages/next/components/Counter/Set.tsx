@@ -5,7 +5,7 @@ import { getContractInfo } from '../../utils/main'
 import { useSharedState } from '../../utils/SharedState'
 
 export default function Set(props: Props) {
-  const { contract } = getContractInfo()
+  const { contract } = getContractInfo('Counter')
   const { isLoading, setIsLoading } = props
   const { setErrorMessage } = useSharedState()
   const { state, send } = useContractFunction(contract, 'set')

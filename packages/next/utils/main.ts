@@ -14,9 +14,13 @@ export function formatValue(value: BigNumber, digits: number): string {
   return formatUnits(roundValue(value, digits), digits)
 }
 
-export function getContractInfo(): ContractInfo {
-  const address = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS!
-  const abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_CONTRACT_ABI!))
+export function getContractInfo(name: ContractName): ContractInfo {
+  let address = process.env.NEXT_PUBLIC_COUNTER_CONTRACT_ADDRESS!
+  let abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_COUNTER_CONTRACT_ABI!))
+  if (name === 'Messages') {
+    address = process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ADDRESS!
+    abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ABI!))
+  }
   const contract = new Contract(address, abi)
   return {
     address,
@@ -24,6 +28,8 @@ export function getContractInfo(): ContractInfo {
     contract
   }
 }
+
+type ContractName = 'Counter' | 'Messages'
 
 type ContractInfo = {
   address: string
