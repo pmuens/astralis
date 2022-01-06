@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 
 import Hero from '../components/Hero'
 
-const Home: NextPage = () => {
+const Index: NextPage = () => {
   return (
     <>
       <NextSeo title="Home" description="Welcome to the Next.js Template for EVM-based dApps." />
@@ -23,4 +23,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Index

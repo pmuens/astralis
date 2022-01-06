@@ -11,7 +11,7 @@ import Layout from '../components/Layout'
 import { SharedStateProvider } from '../utils/SharedState'
 import ConnectionCheck from '../components/ConnectionCheck'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   const CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID!)
   const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL!
 
@@ -41,4 +41,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default App

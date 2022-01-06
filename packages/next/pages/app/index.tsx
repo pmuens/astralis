@@ -6,7 +6,7 @@ import Info from '../../components/Info'
 import Transactions from '../../components/Transactions'
 import Notifications from '../../components/Notifications'
 
-const App: NextPage = () => {
+const Index: NextPage = () => {
   return (
     <>
       <NextSeo title="App" description="Welcome to the dApp." />
@@ -46,4 +46,4 @@ const App: NextPage = () => {
   )
 }
 
-export default App
+export default Index
