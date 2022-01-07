@@ -1,4 +1,5 @@
-import { useContext, useState, createContext, Dispatch, SetStateAction } from 'react'
+import { useTransactions } from '@usedapp/core'
+import { useContext, useState, createContext, Dispatch, SetStateAction, useEffect } from 'react'
 
 export function useSharedState(): SharedStateContext {
   return useContext(SharedStateContext)
@@ -6,7 +7,20 @@ export function useSharedState(): SharedStateContext {
 
 export function SharedStateProvider(props: Props) {
   const { children } = props
+  const { transactions } = useTransactions()
+  const [isLoading, setIsLoading] = useState(false)
   const [notification, setNotification] = useState<Notification>()
+
+  useEffect(() => {
+    if (transactions) {
+      const pending = transactions.some((item) => !item.receipt || !item.receipt.confirmations)
+      if (pending) {
+        setIsLoading(true)
+      } else {
+        setIsLoading(false)
+      }
+    }
+  }, [transactions])
 
   function resetNotification(): void {
     setNotification(undefined)
@@ -15,7 +29,9 @@ export function SharedStateProvider(props: Props) {
   return (
     <SharedStateContext.Provider
       value={{
+        isLoading,
         notification,
+        setIsLoading,
         setNotification,
         resetNotification
       }}
@@ -28,13 +44,15 @@ export function SharedStateProvider(props: Props) {
 const SharedStateContext = createContext<SharedStateContext>({} as SharedStateContext)
 
 type SharedStateContext = {
+  isLoading: boolean
   notification?: Notification
+  setIsLoading: Dispatch<SetStateAction<boolean>>
   setNotification: Dispatch<SetStateAction<Notification | undefined>>
   resetNotification: () => void
 }
 
 type Props = {
-  children: JSX.Element
+  children: JSX.Element[]
 }
 
 type Notification = {

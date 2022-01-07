@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useEthers, shortenAddress } from '@usedapp/core'
 
 import Logo from './Logo'
+import Loading from './Loading'
 import { useSharedState } from '../utils/SharedState'
 
 export default function Header() {
@@ -45,6 +46,7 @@ export default function Header() {
           <>
             {account ? (
               <>
+                <Loading />
                 <span>{shortenAddress(account)}</span>
                 <button onClick={() => deactivate()}>Disconnect</button>
               </>

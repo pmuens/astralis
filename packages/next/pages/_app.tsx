@@ -27,16 +27,16 @@ function App({ Component, pageProps }: AppProps) {
         description="The Next.js Template for EVM-based dApps."
         titleTemplate="%s - Next.js Template for EVM-based dApps"
       />
-      <SharedStateProvider>
-        <DAppProvider config={config}>
+      <DAppProvider config={config}>
+        <SharedStateProvider>
           <Head />
           <Layout>
             <Notification />
             <ConnectionCheck />
             <Component {...pageProps} />
           </Layout>
-        </DAppProvider>
-      </SharedStateProvider>
+        </SharedStateProvider>
+      </DAppProvider>
     </>
   )
 }
