@@ -4,6 +4,7 @@ import { useContractCall, useContractFunction } from '@usedapp/core'
 
 import { useSharedState } from '../../utils/SharedState'
 import { getContractInfo, isId } from '../../utils/main'
+import useTransactionErrorHandling from '../../hooks/useTransactionErrorHandling'
 
 export default function Form(props: Props) {
   const { id } = props
@@ -15,6 +16,7 @@ export default function Form(props: Props) {
 
   const functionName = isId(id) ? 'updateMessage' : 'createMessage'
   const { state, send } = useContractFunction(contract, functionName)
+  useTransactionErrorHandling(state)
 
   const getMessageArgs = isId(id) ? { address, abi, method: 'getMessage', args: [id] } : null
   const message = useContractCall(getMessageArgs)
@@ -26,24 +28,17 @@ export default function Form(props: Props) {
   }, [router])
 
   useEffect(() => {
+    if (router.isReady && state.status != 'None') {
+      router.push('/app/messages')
+    }
+  }, [router, state])
+
+  useEffect(() => {
     if (message?.length) {
       const [, body] = message
       setBody(body)
     }
   }, [message])
-
-  useEffect(() => {
-    if (state.status != 'None') {
-      if (state.status == 'Mining') setIsLoading(true)
-      if (state.status != 'Mining') {
-        setIsLoading(false)
-        router.push('/app/messages')
-      }
-      if (state.status == 'Fail' || state.status == 'Exception') {
-        if (state.errorMessage) setNotification({ message: state.errorMessage, type: 'error' })
-      }
-    }
-  }, [state, router, setIsLoading, setNotification])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

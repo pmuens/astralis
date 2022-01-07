@@ -1,31 +1,27 @@
-import { useContractFunction } from '@usedapp/core'
-import { useEffect, Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
+import { TransactionStatus, useContractFunction } from '@usedapp/core'
 
 import { getContractInfo } from '../../utils/main'
-import { useSharedState } from '../../utils/SharedState'
 
 export default function Increment(props: Props) {
-  const { isLoading, setIsLoading } = props
-  const { setNotification } = useSharedState()
+  const { setState } = props
   const { contract } = getContractInfo('Counter')
   const { state, send } = useContractFunction(contract, 'increment')
 
   useEffect(() => {
-    if (state.status == 'Mining') setIsLoading(true)
-    if (state.status != 'Mining') setIsLoading(false)
-    if (state.status == 'Fail' || state.status == 'Exception') {
-      if (state.errorMessage) setNotification({ message: state.errorMessage, type: 'error' })
+    if (state) {
+      setState(state)
     }
-  }, [state, setIsLoading, setNotification])
+  }, [state, setState])
 
-  return (
-    <button onClick={() => send()} disabled={isLoading}>
-      +
-    </button>
-  )
+  function handleClick() {
+    send()
+    setState(state)
+  }
+
+  return <button onClick={handleClick}>+</button>
 }
 
 type Props = {
-  isLoading: boolean
-  setIsLoading: Dispatch<SetStateAction<boolean>>
+  setState: Dispatch<SetStateAction<TransactionStatus | undefined>>
 }
