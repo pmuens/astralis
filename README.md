@@ -13,9 +13,10 @@ Monorepo Template for EVM-based dApps.
 7. `yarn dev`
 8. MetaMask
    1. Import Hardhat Account #0 Private Key
-   2. Switch to Hardhat Account #0
-   3. Update "Localhost 8545" Network Chain ID to `31337` (Settings -> Networks -> Localhost 8545 -> Chain ID)
-   4. Reset Account (Settings -> Advanced -> Reset Account)
+   2. Import Hardhat Account #1 Private Key
+   3. Switch to Hardhat Account #0
+   4. Update "Localhost 8545" Network Chain ID to `31337` (Settings -> Networks -> Localhost 8545 -> Chain ID)
+   5. Reset Account (Settings -> Advanced -> Reset Account)
 
 ## Deployment
 
