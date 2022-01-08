@@ -1,6 +1,7 @@
 artifacts
 cache
 deployments/localhost
+types
 
 coverage.json
 exports/localhost.json
