@@ -15,7 +15,7 @@ export default function useConnectionInfo(): ConnectionInfo {
   const writeChainName = writeChainId && getChainById(writeChainId)?.chainName
 
   const isConnected = !!account
-  const isCorrectConnection = !!(readChainId && writeChainId && readChainId == writeChainId)
+  const isCorrectConnection = !!(readChainId && writeChainId && readChainId === writeChainId)
 
   return {
     chainId,

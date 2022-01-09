@@ -7,7 +7,7 @@ export default function useTransactionErrorHandling(state?: TransactionStatus) {
   const { setNotification } = useSharedState()
 
   useEffect(() => {
-    if (state && (state.status == 'Fail' || state.status == 'Exception') && state.errorMessage) {
+    if (state && (state.status === 'Fail' || state.status === 'Exception') && state.errorMessage) {
       setNotification({ message: state.errorMessage, type: 'error' })
     }
   }, [state, setNotification])

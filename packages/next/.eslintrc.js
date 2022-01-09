@@ -3,6 +3,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   root: true,
   rules: {
+    eqeqeq: 'error',
     'no-console': 'error'
   }
 }
