@@ -20,6 +20,6 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   root: true,
   rules: {
-    'no-console': 1
+    'no-console': 'error'
   }
 }
