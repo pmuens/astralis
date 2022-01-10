@@ -4,7 +4,7 @@ import { useSharedState } from '../utils/SharedState'
 
 const DISPLAY_SECONDS = 5 * 1000
 
-export default function Notification() {
+export default function Notifications() {
   const { notification, resetNotification } = useSharedState()
 
   useEffect(() => {
