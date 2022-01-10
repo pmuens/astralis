@@ -4,7 +4,6 @@ import type { NextPage } from 'next'
 
 import Info from '../../components/Info'
 import Transactions from '../../components/Transactions'
-import Notifications from '../../components/Notifications'
 
 const Index: NextPage = () => {
   return (
@@ -27,11 +26,6 @@ const Index: NextPage = () => {
       </nav>
 
       <hr />
-
-      <section>
-        <h2>Notifications</h2>
-        <Notifications />
-      </section>
 
       <section>
         <h2>Connection Information</h2>
