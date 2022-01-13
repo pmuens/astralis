@@ -2,8 +2,6 @@ import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
 
-import Info from '../../components/Info'
-
 const Index: NextPage = () => {
   return (
     <>
@@ -23,13 +21,6 @@ const Index: NextPage = () => {
           </li>
         </ul>
       </nav>
-
-      <hr />
-
-      <section>
-        <h2>Connection Information</h2>
-        <Info />
-      </section>
     </>
   )
 }
