@@ -57,9 +57,6 @@ export default function Header() {
             )}
             {gasPrice && <span>{formatValue(gasPrice, 9)} gwei</span>}
             <Link href="/app">App</Link>
-            <Link href="/app/counter">
-              <a>Counter</a>
-            </Link>
             <Link href="/app/messages">
               <a>Messages</a>
             </Link>

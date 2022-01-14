@@ -10,11 +10,6 @@ const Index: NextPage = () => {
       <nav>
         <ul>
           <li>
-            <Link href="/app/counter">
-              <a>Counter App</a>
-            </Link>
-          </li>
-          <li>
             <Link href="/app/messages">
               <a>Messages App</a>
             </Link>

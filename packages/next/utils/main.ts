@@ -18,13 +18,10 @@ export function isId(id: unknown): boolean {
   return Number.isInteger(id)
 }
 
-export function getContractInfo(name: ContractName): ContractInfo {
-  let address = process.env.NEXT_PUBLIC_COUNTER_CONTRACT_ADDRESS!
-  let abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_COUNTER_CONTRACT_ABI!))
-  if (name === 'Messages') {
-    address = process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ADDRESS!
-    abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ABI!))
-  }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function getContractInfo(_name: ContractName): ContractInfo {
+  const address = process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ADDRESS!
+  const abi = new Interface(JSON.parse(process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ABI!))
   const contract = new Contract(address, abi)
   return {
     address,
@@ -33,7 +30,7 @@ export function getContractInfo(name: ContractName): ContractInfo {
   }
 }
 
-type ContractName = 'Counter' | 'Messages'
+type ContractName = 'Messages'
 
 type ContractInfo = {
   address: string
