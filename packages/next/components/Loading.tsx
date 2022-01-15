@@ -1,4 +1,4 @@
-import { useSharedState } from '../utils/SharedState'
+import { useSharedState } from '../lib/utils/SharedState'
 
 export default function Loading() {
   const { isLoading } = useSharedState()

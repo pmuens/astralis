@@ -2,7 +2,7 @@ import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
 
 import Form from '../../../components/Messages/Form'
-import useEnforceWalletConnection from '../../../hooks/useEnforceWalletConnection'
+import useEnforceWalletConnection from '../../../lib/hooks/useEnforceWalletConnection'
 
 const New: NextPage = () => {
   useEnforceWalletConnection('/app/messages')

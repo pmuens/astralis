@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { formatUnits } from '@ethersproject/units'
 import { useContractCall, useContractCalls } from '@usedapp/core'
 
-import { getContractInfo } from '../../utils/main'
+import { getContractInfo } from '../../lib/utils/main'
 
 export default function Messages() {
   const { address, abi } = getContractInfo('Messages')

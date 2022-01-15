@@ -5,8 +5,8 @@ import { useEthers, shortenAddress, useGasPrice } from '@usedapp/core'
 
 import Logo from './Logo'
 import Loading from './Loading'
-import { formatValue } from '../utils/main'
-import { useSharedState } from '../utils/SharedState'
+import { formatValue } from '../lib/utils/main'
+import { useSharedState } from '../lib/utils/SharedState'
 
 export default function Header() {
   const router = useRouter()

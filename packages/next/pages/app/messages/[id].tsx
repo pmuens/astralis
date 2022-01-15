@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useContractCall } from '@usedapp/core'
 import { formatUnits } from '@ethersproject/units'
 
-import { getContractInfo, isId } from '../../../utils/main'
+import { getContractInfo, isId } from '../../../lib/utils/main'
 
 const Show: NextPage = () => {
   const router = useRouter()

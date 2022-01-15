@@ -7,7 +7,7 @@ const { log } = console
 
 function main() {
   const stdio = 'inherit'
-  const projectDir = path.join(__dirname, '..')
+  const projectDir = path.join(__dirname, '..', '..')
 
   log('Cleaning up...')
   execSync('yarn clean', { cwd: projectDir, stdio })

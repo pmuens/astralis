@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { useSharedState } from '../utils/SharedState'
+import { useSharedState } from '../lib/utils/SharedState'
 
 const DISPLAY_SECONDS = 5 * 1000
 

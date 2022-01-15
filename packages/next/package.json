@@ -4,8 +4,8 @@
   "description": "Next.js Template for EVM-based dApps.",
   "scripts": {
     "build": "next build",
-    "clean": "node scripts/clean.js",
-    "deploy": "node scripts/deploy.js",
+    "clean": "node lib/scripts/clean.js",
+    "deploy": "node lib/scripts/deploy.js",
     "dev": "next dev",
     "export": "next export",
     "format": "prettier --config .prettierrc.js --write .",

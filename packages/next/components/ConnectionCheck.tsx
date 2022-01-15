@@ -1,4 +1,4 @@
-import useConnectionInfo from '../hooks/useConnectionInfo'
+import useConnectionInfo from '../lib/hooks/useConnectionInfo'
 
 export default function ConnectionCheck() {
   const { isCorrectConnection, readChainName, writeChainName } = useConnectionInfo()

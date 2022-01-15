@@ -2,7 +2,7 @@ import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
 
 import Messages from '../../../components/Messages'
-import useConnectionInfo from '../../../hooks/useConnectionInfo'
+import useConnectionInfo from '../../../lib/hooks/useConnectionInfo'
 
 const Index: NextPage = () => {
   const { isConnected, isCorrectConnection } = useConnectionInfo()

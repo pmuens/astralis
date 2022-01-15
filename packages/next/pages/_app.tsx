@@ -8,7 +8,7 @@ import type { AppProps } from 'next/app'
 import Head from '../components/Head'
 import Layout from '../components/Layout'
 import Notifications from '../components/Notifications'
-import { SharedStateProvider } from '../utils/SharedState'
+import { SharedStateProvider } from '../lib/utils/SharedState'
 import ConnectionCheck from '../components/ConnectionCheck'
 
 function App({ Component, pageProps }: AppProps) {

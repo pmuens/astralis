@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 import { useContractFunction } from '@usedapp/core'
 
 import Form from '../../../../components/Messages/Form'
-import { getContractInfo, isId } from '../../../../utils/main'
-import useEnforceWalletConnection from '../../../../hooks/useEnforceWalletConnection'
-import useTransactionErrorHandling from '../../../../hooks/useTransactionErrorHandling'
+import { getContractInfo, isId } from '../../../../lib/utils/main'
+import useEnforceWalletConnection from '../../../../lib/hooks/useEnforceWalletConnection'
+import useTransactionErrorHandling from '../../../../lib/hooks/useTransactionErrorHandling'
 
 const Edit: NextPage = () => {
   useEnforceWalletConnection('/app/messages')

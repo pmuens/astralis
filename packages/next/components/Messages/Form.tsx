@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useContractCall, useContractFunction } from '@usedapp/core'
 
-import { useSharedState } from '../../utils/SharedState'
-import { getContractInfo, isId } from '../../utils/main'
-import useTransactionErrorHandling from '../../hooks/useTransactionErrorHandling'
+import { useSharedState } from '../../lib/utils/SharedState'
+import { getContractInfo, isId } from '../../lib/utils/main'
+import useTransactionErrorHandling from '../../lib/hooks/useTransactionErrorHandling'
 
 export default function Form(props: Props) {
   const { id } = props
