@@ -27,7 +27,7 @@ const Edit: NextPage = () => {
   }, [router])
 
   useEffect(() => {
-    if (router.isReady && state.status !== 'None') {
+    if (router.isReady && state.status === 'Success') {
       router.push('/app/messages')
     }
   }, [router, state])
