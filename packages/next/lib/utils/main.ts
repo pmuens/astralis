@@ -18,6 +18,10 @@ export function isId(id: unknown): boolean {
   return Number.isInteger(id)
 }
 
+export function shortenAddress(address: string): string {
+  return address.slice(0, 5) + '...' + address.slice(-4)
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getContractInfo(_name: ContractName): ContractInfo {
   const address = process.env.NEXT_PUBLIC_MESSAGES_CONTRACT_ADDRESS!
