@@ -1,4 +1,4 @@
-import { useTransactions } from '@usedapp/core'
+import { useWaitForTransaction } from 'wagmi'
 import { useContext, useState, createContext, Dispatch, SetStateAction, useEffect } from 'react'
 
 export function useSharedState(): SharedStateContext {
@@ -7,20 +7,21 @@ export function useSharedState(): SharedStateContext {
 
 export function SharedStateProvider(props: Props) {
   const { children } = props
-  const { transactions } = useTransactions()
+  const [txHash, setTxHash] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
   const [notification, setNotification] = useState<Notification>()
 
+  const [{ data: txData }] = useWaitForTransaction({ hash: txHash })
+  const confirmations = (txData && txData.confirmations) || 0
+
   useEffect(() => {
-    if (transactions) {
-      const pending = transactions.some((item) => !item.receipt || !item.receipt.confirmations)
-      if (pending) {
-        setIsLoading(true)
-      } else {
+    if (txHash) {
+      setIsLoading(true)
+      if (confirmations > 0) {
         setIsLoading(false)
       }
     }
-  }, [transactions])
+  }, [txHash, confirmations])
 
   function resetNotification(): void {
     setNotification(undefined)
@@ -31,6 +32,7 @@ export function SharedStateProvider(props: Props) {
       value={{
         isLoading,
         notification,
+        setTxHash,
         setIsLoading,
         setNotification,
         resetNotification
@@ -47,6 +49,7 @@ type SharedStateContext = {
   isLoading: boolean
   notification?: Notification
   setIsLoading: Dispatch<SetStateAction<boolean>>
+  setTxHash: Dispatch<SetStateAction<string | undefined>>
   setNotification: Dispatch<SetStateAction<Notification | undefined>>
   resetNotification: () => void
 }

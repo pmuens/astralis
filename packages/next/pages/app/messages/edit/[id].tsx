@@ -1,36 +1,63 @@
 import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { useContractFunction } from '@usedapp/core'
+import { useEffect, useMemo, useState } from 'react'
+import { useContractWrite, useWaitForTransaction } from 'wagmi'
 
 import Form from '../../../../components/Messages/Form'
+import { useSharedState } from '../../../../lib/utils/SharedState'
 import { getContractInfo, isId } from '../../../../lib/utils/main'
+import useErrorHandling from '../../../../lib/hooks/useErrorHandling'
+import useLoadingHandling from '../../../../lib/hooks/useLoadingHandling'
 import useEnforceWalletConnection from '../../../../lib/hooks/useEnforceWalletConnection'
-import useTransactionErrorHandling from '../../../../lib/hooks/useTransactionErrorHandling'
 
 const Edit: NextPage = () => {
   useEnforceWalletConnection('/app/messages')
 
   const router = useRouter()
-  const { contract } = getContractInfo('Messages')
-  const [isLoading, setIsLoading] = useState(true)
   const [id, setId] = useState<number | undefined>()
-  const { state, send } = useContractFunction(contract, 'removeMessage')
-  useTransactionErrorHandling(state)
+  const { address, abi } = getContractInfo('Messages')
+  const [confirmations, setConfirmations] = useState(0)
+  const { isLoading, setTxHash, setIsLoading } = useSharedState()
+
+  const config = { addressOrName: address, contractInterface: abi }
+  const writeArgs = useMemo(() => isId(id) && [id], [id])
+  const [writeResult, write] = useContractWrite(config, 'removeMessage', { args: writeArgs })
+
+  const [waitResult] = useWaitForTransaction({ hash: writeResult.data?.hash })
+
+  const { data: writeData, error: writeError, loading: writeLoading } = writeResult
+  const { data: waitData, error: waitError, loading: waitLoading } = waitResult
+
+  useErrorHandling([writeError, waitError])
+  useLoadingHandling([writeLoading, waitLoading])
 
   useEffect(() => {
-    if (router.isReady) {
-      setId(parseInt(router.query.id as string))
-      setIsLoading(false)
+    if (!writeLoading && writeData) {
+      setTxHash(writeData.hash)
     }
-  }, [router])
+  }, [writeLoading, writeData, setTxHash])
 
   useEffect(() => {
-    if (router.isReady && state.status === 'Success') {
+    if (!waitLoading && waitData) {
+      setConfirmations(waitData.confirmations)
+    }
+  }, [waitLoading, waitData])
+
+  useEffect(() => {
+    if (!router.isReady) {
+      setIsLoading(true)
+    } else if (router.isReady) {
+      setIsLoading(false)
+      setId(parseInt(router.query.id as string))
+    }
+  }, [router, setIsLoading])
+
+  useEffect(() => {
+    if (router.isReady && confirmations > 0) {
       router.push('/app/messages')
     }
-  }, [router, state])
+  }, [router, confirmations])
 
   return (
     <>
@@ -40,7 +67,7 @@ const Edit: NextPage = () => {
 
       {isId(id) && <Form id={id} />}
 
-      <button onClick={() => send(id)} disabled={isLoading}>
+      <button onClick={() => write()} disabled={isLoading}>
         Delete Message
       </button>
     </>

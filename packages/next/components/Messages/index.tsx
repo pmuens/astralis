@@ -1,20 +1,38 @@
 import Link from 'next/link'
+import { useContractRead } from 'wagmi'
 import { formatUnits } from '@ethersproject/units'
-import { useContractCall, useContractCalls } from '@usedapp/core'
+import { BigNumberish } from '@ethersproject/bignumber'
 
 import { getContractInfo } from '../../lib/utils/main'
+import useMulticall from '../../lib/hooks/useMulticall'
+import { useSharedState } from '../../lib/utils/SharedState'
+import useErrorHandling from '../../lib/hooks/useErrorHandling'
+import useLoadingHandling from '../../lib/hooks/useLoadingHandling'
 
 export default function Messages() {
+  const { isLoading } = useSharedState()
   const { address, abi } = getContractInfo('Messages')
-  const [nextId] = useContractCall({ address, abi, method: 'nextId', args: [] }) ?? []
+
+  const config = { addressOrName: address, contractInterface: abi }
+  const [readResult] = useContractRead(config, 'nextId')
+
+  const { data: readData, error: readError, loading: readLoading } = readResult
 
   const messagesCalls = []
+  const nextId = readData as BigNumberish
   for (let i = 0; nextId && i < nextId; i++) {
-    messagesCalls.push({ address, abi, method: 'messages', args: [i] })
+    messagesCalls.push({ address, interface: abi, function: 'messages', args: [i] })
   }
 
-  const messages = useContractCalls(messagesCalls) ?? []
+  const [multicallResult] = useMulticall(messagesCalls)
 
+  const { data: multicallData, error: multicallError, loading: multicallLoading } = multicallResult
+
+  useErrorHandling([readError, multicallError])
+  useLoadingHandling([readLoading, multicallLoading])
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const messages = multicallData as [any[]]
   const items = messages?.reduce((accum, message) => {
     if (message?.length) {
       const [id, body, owner, createdAt, updatedAt, isEntity] = message
@@ -46,7 +64,9 @@ export default function Messages() {
 
   return (
     <>
-      {items?.length ? (
+      {isLoading ? (
+        <>Loading...</>
+      ) : items?.length ? (
         <table>
           <thead>
             <tr>

@@ -1,24 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import '../styles/globals.css'
+import { providers } from 'ethers'
 import { DefaultSeo } from 'next-seo'
-import { Config, DAppProvider } from '@usedapp/core'
 import type { AppProps } from 'next/app'
+import { Provider as WagmiProvider } from 'wagmi'
 
 import Head from '../components/Head'
 import Layout from '../components/Layout'
 import Notifications from '../components/Notifications'
-import { SharedStateProvider } from '../lib/utils/SharedState'
 import ConnectionCheck from '../components/ConnectionCheck'
+import { SharedStateProvider } from '../lib/utils/SharedState'
 
 function App({ Component, pageProps }: AppProps) {
-  const CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID!)
   const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL!
-
-  const config: Config = {
-    readOnlyChainId: CHAIN_ID,
-    readOnlyUrls: { [CHAIN_ID]: RPC_URL }
-  }
+  const provider = () => new providers.JsonRpcProvider(RPC_URL)
 
   return (
     <>
@@ -27,7 +23,7 @@ function App({ Component, pageProps }: AppProps) {
         description="The Next.js Template for EVM-based dApps."
         titleTemplate="%s - Next.js Template for EVM-based dApps"
       />
-      <DAppProvider config={config}>
+      <WagmiProvider provider={provider}>
         <SharedStateProvider>
           <Head />
           <Layout>
@@ -36,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </Layout>
         </SharedStateProvider>
-      </DAppProvider>
+      </WagmiProvider>
     </>
   )
 }

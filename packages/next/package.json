@@ -19,12 +19,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@usedapp/core": "^0.7.3",
+    "@ethersproject/abi": "^5.5.0",
+    "@ethersproject/bignumber": "^5.5.0",
+    "@ethersproject/contracts": "^5.5.0",
+    "@ethersproject/units": "^5.5.0",
     "ethers": "^5.5.3",
     "next": "12.0.7",
     "next-seo": "^4.28.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "wagmi": "^0.1.6"
   },
   "devDependencies": {
     "@fleekhq/fleek-cli": "^0.1.8",

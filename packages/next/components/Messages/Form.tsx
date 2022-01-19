@@ -1,51 +1,78 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useContractCall, useContractFunction } from '@usedapp/core'
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react'
+import { useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi'
 
 import { useSharedState } from '../../lib/utils/SharedState'
 import { getContractInfo, isId } from '../../lib/utils/main'
-import useTransactionErrorHandling from '../../lib/hooks/useTransactionErrorHandling'
+import useErrorHandling from '../../lib/hooks/useErrorHandling'
+import useLoadingHandling from '../../lib/hooks/useLoadingHandling'
 
 export default function Form(props: Props) {
   const { id } = props
   const router = useRouter()
   const [body, setBody] = useState('')
-  const { setNotification } = useSharedState()
-  const [isLoading, setIsLoading] = useState(true)
-  const { address, abi, contract } = getContractInfo('Messages')
+  const { address, abi } = getContractInfo('Messages')
+  const [confirmations, setConfirmations] = useState(0)
+  const { isLoading, setIsLoading, setNotification, setTxHash } = useSharedState()
 
-  const functionName = isId(id) ? 'updateMessage' : 'createMessage'
-  const { state, send } = useContractFunction(contract, functionName)
-  useTransactionErrorHandling(state)
+  const config = { addressOrName: address, contractInterface: abi }
 
-  const getMessageArgs = isId(id) ? { address, abi, method: 'getMessage', args: [id] } : null
-  const message = useContractCall(getMessageArgs)
+  const readArgs = useMemo(() => isId(id) && [id], [id])
+  const [readResult] = useContractRead(config, 'getMessage', {
+    args: readArgs,
+    skip: !isId(id)
+  })
+
+  const writeArgs = useMemo(() => (isId(id) ? [id, body] : [body]), [id, body])
+  const [writeResult, write] = useContractWrite(config, isId(id) ? 'updateMessage' : 'createMessage', {
+    args: writeArgs
+  })
+
+  const [waitResult] = useWaitForTransaction({ hash: writeResult.data?.hash })
+
+  const { data: readData, error: readError, loading: readLoading } = readResult
+  const { data: writeData, error: writeError, loading: writeLoading } = writeResult
+  const { data: waitData, error: waitError, loading: waitLoading } = waitResult
+
+  useErrorHandling([readError, writeError, waitError])
+  useLoadingHandling([readLoading, writeLoading, waitLoading])
 
   useEffect(() => {
-    if (router.isReady) {
+    if (!readLoading && readData?.length) {
+      const [, body] = readData
+      setBody(body as string)
+    }
+  }, [readLoading, readData])
+
+  useEffect(() => {
+    if (!writeLoading && writeData) {
+      setTxHash(writeData.hash)
+    }
+  }, [writeLoading, writeData, setTxHash])
+
+  useEffect(() => {
+    if (!waitLoading && waitData) {
+      setConfirmations(waitData.confirmations)
+    }
+  }, [waitLoading, waitData])
+
+  useEffect(() => {
+    if (!router.isReady) {
+      setIsLoading(true)
+    } else if (router.isReady) {
       setIsLoading(false)
     }
-  }, [router])
+  }, [router, setIsLoading])
 
   useEffect(() => {
-    if (router.isReady && state.status === 'Success') {
+    if (router.isReady && confirmations > 0) {
       router.push('/app/messages')
     }
-  }, [router, state])
-
-  useEffect(() => {
-    if (message?.length) {
-      const [, body] = message
-      setBody(body)
-    }
-  }, [message])
+  }, [router, confirmations])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!!body.trim()) {
-      if (isId(id)) return send(id, body)
-      return send(body)
-    }
+    if (!!body.trim()) return write()
     setNotification({ message: "Body can't be empty", type: 'error' })
   }
 

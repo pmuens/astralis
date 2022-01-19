@@ -1,25 +1,27 @@
 import Link from 'next/link'
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useEthers, shortenAddress, useGasPrice } from '@usedapp/core'
+import { useAccount, useConnect } from 'wagmi'
 
 import Logo from './Logo'
 import Loading from './Loading'
-import { formatValue } from '../lib/utils/main'
-import { useSharedState } from '../lib/utils/SharedState'
+import { shortenAddress } from '../lib/utils/main'
+import useErrorHandling from '../lib/hooks/useErrorHandling'
+import useLoadingHandling from '../lib/hooks/useLoadingHandling'
 
 export default function Header() {
   const router = useRouter()
-  const gasPrice = useGasPrice()
-  const { setNotification } = useSharedState()
-  const { account, error, activateBrowserWallet, deactivate } = useEthers()
+  const [connectResult, connect] = useConnect()
+  const [accountResult, disconnect] = useAccount()
 
-  useEffect(() => {
-    if (error) {
-      const { message } = error
-      setNotification({ message, type: 'error' })
-    }
-  }, [error, setNotification])
+  const { data: connectData, error: connectError, loading: connectLoading } = connectResult
+  const { data: accountData, error: accountError, loading: accountLoading } = accountResult
+
+  useErrorHandling([connectError, accountError])
+  useLoadingHandling([connectLoading, accountLoading])
+
+  const address = accountData?.address
+  const { connectors } = connectData
+  const injected = connectors[0]
 
   return (
     <header>
@@ -46,16 +48,15 @@ export default function Header() {
       <nav>
         {router.pathname.includes('app') ? (
           <>
-            {account ? (
+            {address ? (
               <>
                 <Loading />
-                <span>{shortenAddress(account)}</span>
-                <button onClick={() => deactivate()}>Disconnect</button>
+                <span>{shortenAddress(address)}</span>
+                <button onClick={() => disconnect()}>Disconnect</button>
               </>
             ) : (
-              <button onClick={() => activateBrowserWallet()}>Connect Wallet</button>
+              <button onClick={() => connect(injected)}>Connect Wallet</button>
             )}
-            {gasPrice && <span>{formatValue(gasPrice, 9)} gwei</span>}
             <Link href="/app">App</Link>
             <Link href="/app/messages">
               <a>Messages</a>

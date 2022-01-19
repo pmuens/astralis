@@ -15,9 +15,7 @@ const Index: NextPage = () => {
         {!isConnected || (isConnected && isCorrectConnection) ? (
           <Messages />
         ) : (
-          <p>
-            Please connect to the correct network to continue (check the logs if you did and still see this message)
-          </p>
+          <p>Please connect to the correct network to continue</p>
         )}
       </section>
     </>
