@@ -9,6 +9,8 @@ export default function useErrorHandling(errors: (Error | undefined)[]): void {
 
   useEffect(() => {
     if (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
       const { message } = error
       message && setNotification({ message, type: 'error' })
     }
