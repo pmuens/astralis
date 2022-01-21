@@ -12791,6 +12791,7 @@ __metadata:
     prettier: ^2.5.1
     react: 17.0.2
     react-dom: 17.0.2
+    swr: ^1.1.2
     typescript: 4.5.4
     wagmi: ^0.1.6
   languageName: unknown
@@ -16420,6 +16421,15 @@ __metadata:
     tar: ^4.0.2
     xhr-request: ^1.0.1
   checksum: 1de56e0cb02c1c80e041efb2bd2cc7250c5451c3016967266c16d5c1e8c74fe5c3aae45dc46065b1f4d77667a8453b967961ec58b3975469522f566aa840a914
+  languageName: node
+  linkType: hard
+
+"swr@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "swr@npm:1.1.2"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: 84bf222c667bf4f94bf9bcaf51f11443d69eb6feb82649c06ef8e576c51f52269872dbda4b926f267fd79cfeaf7bd84c6a62d519db25fe2af1fb811e75163e94
   languageName: node
   linkType: hard
 

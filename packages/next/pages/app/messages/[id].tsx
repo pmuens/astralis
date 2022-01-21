@@ -1,31 +1,18 @@
 import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
+import { BigNumberish } from 'ethers'
 import { useRouter } from 'next/router'
-import { useContractRead } from 'wagmi'
+import { useEffect, useState } from 'react'
 import { formatUnits } from '@ethersproject/units'
-import { useEffect, useMemo, useState } from 'react'
 
+import useMessage from '../../../lib/hooks/useMessage'
 import { useSharedState } from '../../../lib/utils/SharedState'
-import { getContractInfo, isId } from '../../../lib/utils/main'
-import useErrorHandling from '../../../lib/hooks/useErrorHandling'
-import useLoadingHandling from '../../../lib/hooks/useLoadingHandling'
 
 const Show: NextPage = () => {
   const router = useRouter()
+  const { setIsLoading } = useSharedState()
   const [id, setId] = useState<number | undefined>()
-  const { isLoading, setIsLoading } = useSharedState()
-  const { address, abi } = getContractInfo('Messages')
-
-  const skip = !isId(id)
-  const args = useMemo(() => isId(id) && [id], [id])
-  const config = { addressOrName: address, contractInterface: abi }
-  const [{ data, error, loading }] = useContractRead(config, 'getMessage', {
-    args,
-    skip
-  })
-
-  useErrorHandling([error])
-  useLoadingHandling([loading])
+  const message = useMessage(id)
 
   useEffect(() => {
     if (!router.isReady) {
@@ -36,17 +23,13 @@ const Show: NextPage = () => {
     }
   }, [router, setIsLoading])
 
-  let body
-  let owner
-  let createdAt
-  let updatedAt
-  let isEntity
-  if (data) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const message = data as any[]
-    if (message.length) {
-      ;[, body, owner, createdAt, updatedAt, isEntity] = message
-    }
+  const msg: Record<string, string> = {}
+  if (message) {
+    msg.body = message[1] as string
+    msg.owner = message[2] as string
+    msg.createdAt = formatUnits(message[3] as BigNumberish, 0)
+    msg.updatedAt = formatUnits(message[4] as BigNumberish, 0)
+    msg.isEntity = (message[5] as boolean) ? 'true' : ('false' as string)
   }
 
   return (
@@ -54,16 +37,14 @@ const Show: NextPage = () => {
       <NextSeo title={`Message "${id}"`} description={`Show message "${id}" details.`} />
 
       <h1>Message &quot;{id}&quot; details</h1>
-      {isLoading || !data ? (
-        <p>Loading...</p>
-      ) : (
+      {Object.keys(msg).length && (
         <ul>
           <li>{id}</li>
-          <li>{body}</li>
-          <li>{owner}</li>
-          <li>{createdAt && formatUnits(createdAt, 0)}</li>
-          <li>{updatedAt && formatUnits(updatedAt, 0)}</li>
-          <li>{isEntity ? 'true' : 'false'}</li>
+          <li>{msg.body}</li>
+          <li>{msg.owner}</li>
+          <li>{msg.createdAt}</li>
+          <li>{msg.updatedAt}</li>
+          <li>{msg.isEntity}</li>
         </ul>
       )}
     </>

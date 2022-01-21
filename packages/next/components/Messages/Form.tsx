@@ -1,60 +1,28 @@
 import { useRouter } from 'next/router'
-import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react'
-import { useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
+import { isId } from '../../lib/utils/main'
+import useMessage from '../../lib/hooks/useMessage'
 import { useSharedState } from '../../lib/utils/SharedState'
-import { getContractInfo, isId } from '../../lib/utils/main'
-import useErrorHandling from '../../lib/hooks/useErrorHandling'
-import useLoadingHandling from '../../lib/hooks/useLoadingHandling'
+import useCreateMessage from '../../lib/hooks/useCreateMessage'
+import useUpdateMessage from '../../lib/hooks/useUpdateMessage'
 
 export default function Form(props: Props) {
   const { id } = props
   const router = useRouter()
   const [body, setBody] = useState('')
-  const { address, abi } = getContractInfo('Messages')
-  const [confirmations, setConfirmations] = useState(0)
-  const { isLoading, setIsLoading, setNotification, setTxHash } = useSharedState()
+  const { isLoading, setIsLoading, setNotification } = useSharedState()
 
-  const config = { addressOrName: address, contractInterface: abi }
-
-  const readArgs = useMemo(() => isId(id) && [id], [id])
-  const [readResult] = useContractRead(config, 'getMessage', {
-    args: readArgs,
-    skip: !isId(id)
-  })
-
-  const writeArgs = useMemo(() => (isId(id) ? [id, body] : [body]), [id, body])
-  const [writeResult, write] = useContractWrite(config, isId(id) ? 'updateMessage' : 'createMessage', {
-    args: writeArgs
-  })
-
-  const [waitResult] = useWaitForTransaction({ hash: writeResult.data?.hash })
-
-  const { data: readData, error: readError, loading: readLoading } = readResult
-  const { data: writeData, error: writeError, loading: writeLoading } = writeResult
-  const { data: waitData, error: waitError, loading: waitLoading } = waitResult
-
-  useErrorHandling([readError, writeError, waitError])
-  useLoadingHandling([readLoading, writeLoading, waitLoading])
+  const message = useMessage(id)
+  const [, create] = useCreateMessage(body)
+  const [, update] = useUpdateMessage(id, body)
 
   useEffect(() => {
-    if (!readLoading && readData?.length) {
-      const [, body] = readData
+    if (message && message.length) {
+      const [, body] = message
       setBody(body as string)
     }
-  }, [readLoading, readData])
-
-  useEffect(() => {
-    if (!writeLoading && writeData) {
-      setTxHash(writeData.hash)
-    }
-  }, [writeLoading, writeData, setTxHash])
-
-  useEffect(() => {
-    if (!waitLoading && waitData) {
-      setConfirmations(waitData.confirmations)
-    }
-  }, [waitLoading, waitData])
+  }, [message])
 
   useEffect(() => {
     if (!router.isReady) {
@@ -64,15 +32,17 @@ export default function Form(props: Props) {
     }
   }, [router, setIsLoading])
 
-  useEffect(() => {
-    if (router.isReady && confirmations > 0) {
-      router.push('/app/messages')
-    }
-  }, [router, confirmations])
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!!body.trim()) return write()
+    if (!!body.trim()) {
+      if (!isId(id)) {
+        await create()
+      } else {
+        await update()
+      }
+      router.push('/app/messages')
+      return
+    }
     setNotification({ message: "Body can't be empty", type: 'error' })
   }
 
