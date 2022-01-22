@@ -1,12 +1,12 @@
 import useSWR from 'swr'
 
 import useNextId from './useNextId'
-import useMulticall from './useMulticall'
-import { DataType } from '../utils/constants'
-import { getContractInfo } from '../utils/main'
-import useErrorHandling from './useErrorHandling'
-import useLoadingHandling from './useLoadingHandling'
-import useKeepBlockchainDataFresh from './useKeepBlockchainDataFresh'
+import useMulticall from '../useMulticall'
+import { DataType } from '../../utils/constants'
+import { getContractInfo } from '../../utils/main'
+import useErrorHandling from '../useErrorHandling'
+import useLoadingHandling from '../useLoadingHandling'
+import useKeepBlockchainDataFresh from '../useKeepBlockchainDataFresh'
 
 export default function useMessage(suspense = false): [unknown[]] | undefined {
   const nextId = useNextId()

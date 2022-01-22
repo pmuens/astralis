@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 import { isId } from '../../lib/utils/main'
-import useMessage from '../../lib/hooks/useMessage'
+import useMessage from '../../lib/hooks/messages/useMessage'
 import { useSharedState } from '../../lib/utils/SharedState'
-import useCreateMessage from '../../lib/hooks/useCreateMessage'
-import useUpdateMessage from '../../lib/hooks/useUpdateMessage'
+import useCreateMessage from '../../lib/hooks/messages/useCreateMessage'
+import useUpdateMessage from '../../lib/hooks/messages/useUpdateMessage'
 
 export default function Form(props: Props) {
   const { id } = props

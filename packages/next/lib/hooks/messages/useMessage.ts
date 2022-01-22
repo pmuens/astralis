@@ -2,11 +2,11 @@ import useSWR from 'swr'
 import { useMemo } from 'react'
 import { useContractRead } from 'wagmi'
 
-import { DataType } from '../utils/constants'
-import useErrorHandling from './useErrorHandling'
-import useLoadingHandling from './useLoadingHandling'
-import { getContractInfo, isId } from '../utils/main'
-import useKeepBlockchainDataFresh from './useKeepBlockchainDataFresh'
+import { DataType } from '../../utils/constants'
+import useErrorHandling from '../useErrorHandling'
+import useLoadingHandling from '../useLoadingHandling'
+import { getContractInfo, isId } from '../../utils/main'
+import useKeepBlockchainDataFresh from '../useKeepBlockchainDataFresh'
 
 export default function useMessage(id: number | undefined, suspense = false): unknown[] | undefined {
   const { address, abi } = getContractInfo('Messages')

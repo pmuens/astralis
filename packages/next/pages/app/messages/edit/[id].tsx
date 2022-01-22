@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import Form from '../../../../components/Messages/Form'
 import { useSharedState } from '../../../../lib/utils/SharedState'
-import useRemoveMessage from '../../../../lib/hooks/useRemoveMessage'
+import useRemoveMessage from '../../../../lib/hooks/messages/useRemoveMessage'
 import useEnforceWalletConnection from '../../../../lib/hooks/useEnforceWalletConnection'
 
 const Edit: NextPage = () => {

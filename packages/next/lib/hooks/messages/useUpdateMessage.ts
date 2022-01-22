@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 import { useContractWrite, useWaitForTransaction } from 'wagmi'
 
-import { getContractInfo } from '../utils/main'
-import useErrorHandling from './useErrorHandling'
-import { useSharedState } from '../utils/SharedState'
-import useLoadingHandling from './useLoadingHandling'
+import { getContractInfo } from '../../utils/main'
+import useErrorHandling from '../useErrorHandling'
+import { useSharedState } from '../../utils/SharedState'
+import useLoadingHandling from '../useLoadingHandling'
 
-export default function useCreateMessage(body: string | undefined) {
+export default function useUpdateMessage(id: number | undefined, body: string | undefined) {
   const { setTxHash } = useSharedState()
   const { address, abi } = getContractInfo('Messages')
   const config = { addressOrName: address, contractInterface: abi }
 
-  const [writeResult, write] = useContractWrite(config, 'createMessage', {
-    args: [body]
+  const [writeResult, write] = useContractWrite(config, 'updateMessage', {
+    args: [id, body]
   })
 
   const [waitResult] = useWaitForTransaction({ hash: writeResult.data?.hash })
