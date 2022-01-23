@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { Interface } from '@ethersproject/abi'
-import { formatUnits } from '@ethersproject/units'
-import { Contract } from '@ethersproject/contracts'
-import { BigNumber } from '@ethersproject/bignumber'
+import { Contract, ContractInterface, BigNumber, utils } from 'ethers'
+
+const { Interface, formatUnits } = utils
 
 // Adaption of https://ethereum.stackexchange.com/a/97885
 export function roundValue(value: BigNumber, digits: number): BigNumber {
@@ -38,6 +37,6 @@ type ContractName = 'Messages'
 
 type ContractInfo = {
   address: string
-  abi: Interface
+  abi: ContractInterface
   contract: Contract
 }

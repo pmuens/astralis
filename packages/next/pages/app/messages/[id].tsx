@@ -1,12 +1,14 @@
+import { utils } from 'ethers'
 import { NextSeo } from 'next-seo'
 import type { NextPage } from 'next'
 import { BigNumberish } from 'ethers'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { formatUnits } from '@ethersproject/units'
 
 import useMessage from '../../../lib/hooks/messages/useMessage'
 import { useSharedState } from '../../../lib/utils/SharedState'
+
+const { formatUnits } = utils
 
 const Show: NextPage = () => {
   const router = useRouter()

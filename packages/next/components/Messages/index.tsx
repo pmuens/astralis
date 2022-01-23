@@ -1,7 +1,9 @@
 import Link from 'next/link'
-import { formatUnits } from '@ethersproject/units'
+import { utils } from 'ethers'
 
 import useMessages from '../../lib/hooks/messages/useMessages'
+
+const { formatUnits } = utils
 
 export default function Messages() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
