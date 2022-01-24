@@ -2,7 +2,11 @@ import { useWaitForTransaction } from 'wagmi'
 import { useContext, useState, createContext, Dispatch, SetStateAction, useEffect } from 'react'
 
 export function useSharedState(): SharedStateContext {
-  return useContext(SharedStateContext)
+  const context = useContext(SharedStateContext)
+  if (!context) {
+    throw new Error('useSharedState must be used within a SharedStateProvider')
+  }
+  return context
 }
 
 export function SharedStateProvider(props: Props) {
@@ -43,7 +47,7 @@ export function SharedStateProvider(props: Props) {
   )
 }
 
-const SharedStateContext = createContext<SharedStateContext>({} as SharedStateContext)
+const SharedStateContext = createContext<SharedStateContext | undefined>(undefined)
 
 type SharedStateContext = {
   isLoading: boolean
