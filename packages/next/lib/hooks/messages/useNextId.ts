@@ -2,7 +2,7 @@ import useSWR from 'swr'
 import { BigNumberish } from 'ethers'
 import { useContractRead } from 'wagmi'
 
-import { DataType } from '../../utils/constants'
+import { DataType } from './types'
 import { getContractInfo } from '../../utils/main'
 import useErrorHandling from '../useErrorHandling'
 import useLoadingHandling from '../useLoadingHandling'

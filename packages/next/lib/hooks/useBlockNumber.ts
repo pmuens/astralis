@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { useBlockNumber as useBlockNumber_ } from 'wagmi'
 
-import { DataType } from '../utils/constants'
+import { DataType } from './types'
 import useErrorHandling from './useErrorHandling'
 import useLoadingHandling from './useLoadingHandling'
 

@@ -1,8 +1,8 @@
 import useSWR from 'swr'
 
+import { DataType } from './types'
 import useNextId from './useNextId'
 import useMulticall from '../useMulticall'
-import { DataType } from '../../utils/constants'
 import { getContractInfo } from '../../utils/main'
 import useErrorHandling from '../useErrorHandling'
 import useLoadingHandling from '../useLoadingHandling'

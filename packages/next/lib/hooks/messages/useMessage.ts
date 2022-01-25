@@ -2,7 +2,7 @@ import useSWR from 'swr'
 import { useMemo } from 'react'
 import { useContractRead } from 'wagmi'
 
-import { DataType } from '../../utils/constants'
+import { DataType } from './types'
 import useErrorHandling from '../useErrorHandling'
 import useLoadingHandling from '../useLoadingHandling'
 import { getContractInfo, isId } from '../../utils/main'
