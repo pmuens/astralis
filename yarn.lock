@@ -3262,6 +3262,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"astralis@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "astralis@workspace:."
+  dependencies:
+    husky: ^7.0.0
+    pinst: ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "async-eventemitter@npm:^0.2.2, async-eventemitter@npm:^0.2.4":
   version: 0.2.4
   resolution: "async-eventemitter@npm:0.2.4"
@@ -16533,15 +16542,6 @@ __metadata:
   checksum: a04c07bb9e2d8f46776517d4618f2406fb977a74d914ad98b264fc3db0fe8224da5bec11e5f8902c5b9bcb8ace22d95fbe3c7b36b8593b7dfc8391a25898f32f
   languageName: node
   linkType: hard
-
-"template-evm-dapp@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "template-evm-dapp@workspace:."
-  dependencies:
-    husky: ^7.0.0
-    pinst: ^2.0.0
-  languageName: unknown
-  linkType: soft
 
 "test-value@npm:^2.1.0":
   version: 2.1.0

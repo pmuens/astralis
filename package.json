@@ -1,15 +1,15 @@
 {
-  "name": "template-evm-dapp",
+  "name": "astralis",
   "version": "0.1.0",
-  "description": "Monorepo Template for EVM-based dApps.",
+  "description": "Monorepo for rapid development of production grade EVM dApps.",
   "license": "MIT",
-  "homepage": "https://github.com/pmuens/template-evm-dapp#readme",
+  "homepage": "https://github.com/pmuens/astralis#readme",
   "repository": {
     "type": "git",
-    "url": "git@github-pmuens:pmuens/template-evm-dapp.git"
+    "url": "git@github-pmuens:pmuens/astralis.git"
   },
   "bugs": {
-    "url": "https://github.com/pmuens/template-evm-dapp/issues"
+    "url": "https://github.com/pmuens/astralis/issues"
   },
   "author": {
     "name": "Philipp Muens",

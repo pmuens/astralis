@@ -1,6 +1,6 @@
-# Template EVM dApp
+# Astralis
 
-Monorepo Template for EVM-based dApps.
+Monorepo for rapid development of production grade EVM dApps.
 
 ## Setup
 
