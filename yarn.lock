@@ -5,6 +5,44 @@ __metadata:
   version: 5
   cacheKey: 8
 
+"@astralis/hardhat@workspace:packages/hardhat":
+  version: 0.0.0-use.local
+  resolution: "@astralis/hardhat@workspace:packages/hardhat"
+  dependencies:
+    "@nomiclabs/hardhat-ethers": ^2.0.3
+    "@nomiclabs/hardhat-waffle": ^2.0.1
+    "@typechain/ethers-v5": ^8.0.5
+    "@typechain/hardhat": ^3.1.0
+    "@types/chai": ^4.3.0
+    "@types/fs-extra": ^9.0.13
+    "@types/mocha": ^9.0.0
+    "@types/node": ^17.0.5
+    "@typescript-eslint/eslint-plugin": ^5.8.0
+    "@typescript-eslint/parser": ^5.8.0
+    chai: ^4.3.4
+    cross-env: ^7.0.3
+    dotenv: ^10.0.0
+    eslint: ^8.5.0
+    eslint-config-prettier: ^8.3.0
+    ethereum-waffle: ^3.4.0
+    ethers: ^5.5.2
+    fs-extra: ^10.0.0
+    hardhat: ^2.8.0
+    hardhat-deploy: ^0.9.22
+    hardhat-gas-reporter: ^1.0.6
+    lint-staged: ^12.1.4
+    mocha: ^9.1.3
+    prettier: ^2.5.1
+    prettier-plugin-solidity: ^1.0.0-beta.19
+    solhint: ^3.3.6
+    solhint-plugin-prettier: ^0.0.5
+    solidity-coverage: ^0.7.17
+    ts-node: ^10.4.0
+    typechain: ^6.1.0
+    typescript: ^4.5.4
+  languageName: unknown
+  linkType: soft
+
 "@babel/code-frame@npm:7.12.11":
   version: 7.12.11
   resolution: "@babel/code-frame@npm:7.12.11"
@@ -9130,44 +9168,6 @@ __metadata:
   checksum: 6caea11941302affeb5ba3adaa86a81a5bfb8d02b9569dbad16888db6f49901962bafd7087696cd9b016b6e502e23c0a4b015178aea28a270918dfc4e84a63bc
   languageName: node
   linkType: hard
-
-"hardhat@workspace:packages/hardhat":
-  version: 0.0.0-use.local
-  resolution: "hardhat@workspace:packages/hardhat"
-  dependencies:
-    "@nomiclabs/hardhat-ethers": ^2.0.3
-    "@nomiclabs/hardhat-waffle": ^2.0.1
-    "@typechain/ethers-v5": ^8.0.5
-    "@typechain/hardhat": ^3.1.0
-    "@types/chai": ^4.3.0
-    "@types/fs-extra": ^9.0.13
-    "@types/mocha": ^9.0.0
-    "@types/node": ^17.0.5
-    "@typescript-eslint/eslint-plugin": ^5.8.0
-    "@typescript-eslint/parser": ^5.8.0
-    chai: ^4.3.4
-    cross-env: ^7.0.3
-    dotenv: ^10.0.0
-    eslint: ^8.5.0
-    eslint-config-prettier: ^8.3.0
-    ethereum-waffle: ^3.4.0
-    ethers: ^5.5.2
-    fs-extra: ^10.0.0
-    hardhat: ^2.8.0
-    hardhat-deploy: ^0.9.22
-    hardhat-gas-reporter: ^1.0.6
-    lint-staged: ^12.1.4
-    mocha: ^9.1.3
-    prettier: ^2.5.1
-    prettier-plugin-solidity: ^1.0.0-beta.19
-    solhint: ^3.3.6
-    solhint-plugin-prettier: ^0.0.5
-    solidity-coverage: ^0.7.17
-    ts-node: ^10.4.0
-    typechain: ^6.1.0
-    typescript: ^4.5.4
-  languageName: unknown
-  linkType: soft
 
 "has-ansi@npm:^2.0.0":
   version: 2.0.0

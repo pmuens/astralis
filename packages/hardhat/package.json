@@ -1,5 +1,5 @@
 {
-  "name": "hardhat",
+  "name": "@astralis/hardhat",
   "version": "0.1.0",
   "description": "Hardhat Template for EVM-based dApps.",
   "scripts": {
