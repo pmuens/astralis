@@ -1,5 +1,5 @@
 {
-  "name": "next",
+  "name": "@astralis/next",
   "version": "0.1.0",
   "description": "Next.js Template for EVM-based dApps.",
   "scripts": {
