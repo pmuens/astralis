@@ -69,6 +69,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@astralis/root@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@astralis/root@workspace:."
+  dependencies:
+    husky: ^7.0.0
+    pinst: ^2.0.0
+  languageName: unknown
+  linkType: soft
+
 "@babel/code-frame@npm:7.12.11":
   version: 7.12.11
   resolution: "@babel/code-frame@npm:7.12.11"
@@ -3325,15 +3334,6 @@ __metadata:
   checksum: 876231688c66400473ba505731df37ea436e574dd524520294cc3bbc54ea40334865e01fa0d074d74d036ee874ee7e62f486ea38bc421ee8e6a871c06f011766
   languageName: node
   linkType: hard
-
-"astralis@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "astralis@workspace:."
-  dependencies:
-    husky: ^7.0.0
-    pinst: ^2.0.0
-  languageName: unknown
-  linkType: soft
 
 "async-eventemitter@npm:^0.2.2, async-eventemitter@npm:^0.2.4":
   version: 0.2.4

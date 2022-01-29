@@ -1,5 +1,5 @@
 {
-  "name": "astralis",
+  "name": "@astralis/root",
   "version": "0.1.0",
   "description": "Monorepo for rapid development of production grade EVM dApps.",
   "license": "MIT",
